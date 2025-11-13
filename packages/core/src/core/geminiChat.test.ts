@@ -713,9 +713,10 @@ describe('GeminiChat', () => {
       );
 
       const stream = await chat.sendMessageStream(
-        'test-model',
-        { message: 'test' },
+        { model: 'test-model' },
+        'test',
         'prompt-id-malformed',
+        new AbortController().signal,
       );
 
       // Should throw an error
@@ -759,9 +760,10 @@ describe('GeminiChat', () => {
 
       // 2. Send a message
       const stream = await chat.sendMessageStream(
-        'test-model',
-        { message: 'test retry' },
+        { model: 'test-model' },
+        'test retry',
         'prompt-id-retry-malformed',
+        new AbortController().signal,
       );
       const events: StreamEvent[] = [];
       for await (const event of stream) {
